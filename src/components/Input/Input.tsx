@@ -6,12 +6,14 @@ interface InputProps {
   label: string;
   onChangeText: (text: string) => void;
   isLarge?: boolean;
+  password?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
   label,
   onChangeText,
   isLarge = false,
+  password = false,
 }) => {
   return (
     <Container>
@@ -20,6 +22,7 @@ const Input: React.FC<InputProps> = ({
         isLarge={isLarge}
         onChangeText={onChangeText}
         keyboardType="decimal-pad"
+        secureTextEntry={password}
       />
     </Container>
   );

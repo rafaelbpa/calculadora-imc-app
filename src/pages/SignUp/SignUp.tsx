@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, SafeAreaView} from 'react-native';
-import api from '../../services/api';
+import {useDispatch} from 'react-redux';
+import {signUpRequest} from '../../store/modules/auth/actions';
 
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
@@ -8,18 +9,14 @@ import Input from '../../components/Input/Input';
 import {Container} from './styles';
 
 const SignUp: React.FC = () => {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const createAccount = async () => {
-    const response = await api.post('/users', {
-      name,
-      email,
-      password,
-    });
-
-    console.log(response.data);
+    dispatch(signUpRequest(name, email, password));
   };
 
   return (
@@ -27,7 +24,11 @@ const SignUp: React.FC = () => {
       <View style={{flex: 1}}>
         <Input label="Name" onChangeText={text => setName(text)} />
         <Input label="Email" onChangeText={text => setEmail(text)} />
-        <Input label="Senha" onChangeText={text => setPassword(text)} />
+        <Input
+          label="Senha"
+          onChangeText={text => setPassword(text)}
+          password
+        />
       </View>
       <Button
         colors={{backgroundColor: '#ffcc00', labelColor: '#000'}}

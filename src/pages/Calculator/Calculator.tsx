@@ -35,13 +35,18 @@ const Calculator = () => {
         <Title>Vamos calcular seu IMC</Title>
         <View style={{flex: 1, justifyContent: 'center'}}>
           <Input
+            isLarge
             label="Altura (cm)"
             onChangeText={text => {
               setHeight(text);
               console.log(height);
             }}
           />
-          <Input label="Peso (kg)" onChangeText={text => setWeight(text)} />
+          <Input
+            isLarge
+            label="Peso (kg)"
+            onChangeText={text => setWeight(text)}
+          />
         </View>
         <Button
           colors={{backgroundColor: '#ffcc00', labelColor: '#000'}}
